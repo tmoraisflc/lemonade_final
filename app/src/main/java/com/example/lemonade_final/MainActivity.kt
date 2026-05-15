@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -124,6 +125,12 @@ fun LemonadeScreen(modifier: Modifier = Modifier) {
 
 
         Button(
+            colors = ButtonColors(
+                containerColor = Color.Transparent,
+                contentColor = Color.Transparent,
+                disabledContainerColor = Color.Transparent,
+                disabledContentColor = Color.Transparent
+            ),
             onClick = {
                 if (lemonadeStep == LemonadeStep.TREE) {
                     // 1. Antes de ir para o limão, sorteia o número
@@ -146,6 +153,7 @@ fun LemonadeScreen(modifier: Modifier = Modifier) {
             shape = RoundedCornerShape(40.dp), //Bordas bem arredondadas
             modifier = Modifier.padding(top = 240.dp, bottom = 240.dp, start = 100.dp,  end = 100.dp)
         ) { LemonTree(lemonadeImage, lemonadeContentDescription, lemonadeDescription) }
+
     }
 }
 
@@ -177,7 +185,8 @@ fun LemonTree(selectedImage: Int, contentDescriptionImage: Int, description: Int
         )
         Text(
             stringResource(description),
-            modifier = Modifier.padding(top = 24.dp)
+            modifier = Modifier.padding(top = 24.dp),
+            color = Color.Black
         )
     }
 }
