@@ -13,8 +13,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarColors
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -26,17 +30,37 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.lemonade_final.ui.theme.Lemonade_finalTheme
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             Lemonade_finalTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                Scaffold(modifier = Modifier.fillMaxSize(),
+                    topBar ={
+                        //criando a barra amarela do topo
+                    CenterAlignedTopAppBar(
+                        title={
+                            Text(
+                                text="Lemonade",
+                                fontWeight = FontWeight.Bold,
+                                //style = TextStyle(24.dp)  //nao consegui aumentar o tamanho, pq?
+                            )
+                        },
+                        colors = TopAppBarDefaults.topAppBarColors(Color.Yellow)//amarelo da imagem -> como acho a cor mesmo com o MAC???
+
+                    )
+                }
+                    ) { innerPadding ->
                     LemonadeScreen(
                         modifier = Modifier.padding(innerPadding)
                     )
@@ -118,7 +142,9 @@ fun LemonadeScreen(modifier: Modifier = Modifier) {
                 } else {
                     lemonadeStep = LemonadeStep.TREE
                 }
-            }
+            },
+            shape = RoundedCornerShape(40.dp), //Bordas bem arredondadas
+            modifier = Modifier.padding(top = 240.dp, bottom = 240.dp, start = 100.dp,  end = 100.dp)
         ) { LemonTree(lemonadeImage, lemonadeContentDescription, lemonadeDescription) }
     }
 }
@@ -128,7 +154,7 @@ fun LemonadeScreen(modifier: Modifier = Modifier) {
 private fun LemonadeScreenPreview(
 
 ) {
-    
+
 }
 
 
